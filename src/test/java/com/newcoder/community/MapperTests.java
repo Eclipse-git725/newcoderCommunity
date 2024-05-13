@@ -1,7 +1,9 @@
 package com.newcoder.community;
 
 import com.newcoder.community.dao.AlphaDao;
+import com.newcoder.community.dao.DiscussPostMapper;
 import com.newcoder.community.dao.UserMapper;
+import com.newcoder.community.entity.DiscussPost;
 import com.newcoder.community.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +11,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
 import java.util.Date;
+import java.util.List;
 
 @SpringBootTest
 @ContextConfiguration(classes = CommunityApplication.class)
 public class MapperTests {
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    DiscussPostMapper discussPostMapper;
 
     @Test
     public void testSelectUser() {
@@ -56,5 +61,15 @@ public class MapperTests {
     @Test
     public void testDeleteUser() {
         System.out.println(userMapper.deleteByName("test"));
+    }
+
+    @Test
+    public void testSelectPosts() {
+        List<DiscussPost> discussPostList = discussPostMapper.selectDiscussPosts(0, 0, 20);
+        for(DiscussPost post : discussPostList) {
+            System.out.println(post);
+        }
+        int rows = discussPostMapper.selectDiscussPostsRows(0);
+        System.out.println(rows);
     }
 }
