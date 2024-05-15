@@ -60,7 +60,7 @@ public class MapperTests {
 
     @Test
     public void testDeleteUser() {
-        System.out.println(userMapper.deleteByName("test"));
+        System.out.println(userMapper.deleteByName("gxy"));
     }
 
     @Test
